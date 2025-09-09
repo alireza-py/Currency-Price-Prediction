@@ -7,7 +7,7 @@ The results are automatically saved into a CSV file and can also be synced to a 
 
 ## 📑 Table of Contents
 - [Features](#features)
-- [Requirements](#requirements)
+- [Requirements](#⚙️-requirements)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Project Structure](#project-structure)
