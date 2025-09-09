@@ -7,7 +7,7 @@ The results are automatically saved into a CSV file and can also be synced to a 
 
 ## 📑 Table of Contents
 - [Features](#features)
-- [Requirements](#⚙️-requirements)
+- [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Project Structure](#project-structure)
@@ -32,7 +32,7 @@ The results are automatically saved into a CSV file and can also be synced to a 
 
 ---
 
-## ⚙️ Requirements
+## Requirements
 - **Python 3.9+**
 - Core dependencies:
   - `tensorflow`
@@ -45,7 +45,7 @@ The results are automatically saved into a CSV file and can also be synced to a 
 
 ---
 
-## 📥 Installation
+## Installation
 Clone the repository and install the dependencies:
 
 ```bash
@@ -58,7 +58,7 @@ pip install -r requirements.txt
 
 ---
 
-## ▶️ Usage
+## Usage
 Run the main application:
 
 ```bash
@@ -74,7 +74,7 @@ The program will:
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 ```
 .
 ├── main.py               # Application entry point
@@ -88,7 +88,7 @@ The program will:
 
 ---
 
-## ⚡ How It Works
+## How It Works
 1. **Token Configuration**  
    The app reads tokens and their intervals from `TOKENCONFIGS.csv`.  
    For example, if a token is set with a daily interval, its data will be downloaded and updated once per day.
@@ -118,7 +118,7 @@ The program will:
 
 ---
 
-## 🤝 Contributing
+## Contributing
 Contributions, issues, and feature requests are welcome!  
 To contribute:
 1. Fork this repo.
@@ -129,7 +129,7 @@ To contribute:
 
 ---
 
-## 📜 License
+## License
 Distributed under the **MIT License**. See `LICENSE` for more information.
 
 ---
