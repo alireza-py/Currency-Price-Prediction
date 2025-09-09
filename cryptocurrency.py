@@ -26,69 +26,76 @@ class AiConfiguration:
     pricestate = ['High', 'Low']
     model_file = 'lstm_model.keras'
 
+
 class CryptoCurrency:
     def __init__(self) -> None:
         print('------------------------\n')
         self.tools = Utils()
         self.token_history = {}
-        config_file_loc = pathlib.Path() / 'TOKENCONFIGS.csv'
-        result_file = pathlib.Path() / 'result.csv'
+        self.config_file_loc = pathlib.Path() / 'TOKENCONFIGS.csv'
+        self.result_file = pathlib.Path() / 'result.csv'
+        self._ensure_files_exist()
+        self._prepare_token_files()
+        self._update_data_with_retry(max_retries=10)
+        self._load_token_history()
+        print('\n------------------------')
 
-        if not result_file.exists():
-            open(result_file, "wb")
+    def _ensure_files_exist(self):
+        if not self.result_file.exists():
+            open(self.result_file, "wb").close()
+        if not self.config_file_loc.exists():
+            open(self.config_file_loc, "wb").close()
 
-        if not config_file_loc.exists():
-            open(config_file_loc, "wb")
-        
-        if not os.path.getsize(config_file_loc) == 0:    
-            config_file = pandas.read_csv(config_file_loc, header=None, delimiter=' ')        
-            for data in config_file.values:
-                Token.name = data[0]
-                for interval in data[1:]:
-                    match interval:
-                        case Token.interval_daily:
-                            Token.interval = "d"
-                        case Token.interval_weekly:
-                            Token.interval = "w"
-                        case Token.interval_monthly:
-                            Token.interval = "m"
-                        case Token.interval_yearly:
-                            Token.interval = "y"
-                    self.tools.file_maker(f"{Token.name}_{Token.interval}")
-        
+    def _prepare_token_files(self):
+        if os.path.getsize(self.config_file_loc) == 0:
+            return
+        config_file = pandas.read_csv(self.config_file_loc, header=None, delimiter=' ')
+        for data in config_file.values:
+            Token.name = data[0]
+            for interval in data[1:]:
+                Token.interval = self._interval_to_short(interval)
+                self.tools.file_maker(f"{Token.name}_{Token.interval}")
+
+    def _interval_to_short(self, interval):
+        if interval == Token.interval_daily:
+            return "d"
+        elif interval == Token.interval_weekly:
+            return "w"
+        elif interval == Token.interval_monthly:
+            return "m"
+        elif interval == Token.interval_yearly:
+            return "y"
+        return interval
+
+    def _update_data_with_retry(self, max_retries=10):
         count = 0
-        while True:
+        while count < max_retries:
             if self.tools.check_internet_connection():
                 status = self.tools.update()
                 if status == -1:
+                    count += 1
                     continue
                 break
             print("# Trying again for updating #")
-            if count >= 10:
-                break
             count += 1
             time.sleep(.5)
 
+    def _load_token_history(self):
         for file in self.tools.list_file():
             result = (re.findall(r"\\(.+).csv", str(file)))[0]
             Token.name = result[:-2]
             Token.interval = result[-1]
             df = pandas.read_csv(file)
             df = self.remove_outliers_isolation_forest(
-                df, 
-                features_column= AiConfiguration.pricestate,
-                contamination= 0.03
+                df,
+                features_column=AiConfiguration.pricestate,
+                contamination=0.03
             )
             self.token_history[(Token.name, Token.interval)] = df
-        print('\n------------------------')
-
-        # config = tensorflow.compat.v1.ConfigProto()
-        # config.gpu_options.allow_growth = True
-        # tensorflow.compat.v1.Session(config=config)
 
     def price_prediction_tensorflow(self, data) -> dict:
         result = {}
-        self.set_seed(42)
+        #self.set_seed(42)
         for state in AiConfiguration.pricestate:
             tensorflow.compat.v1.reset_default_graph()
             tensorflow.keras.backend.clear_session()
