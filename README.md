@@ -6,14 +6,14 @@ The results are automatically saved into a CSV file and can also be synced to a 
 ---
 
 ## 📑 Table of Contents
-- [Features](#Features)
-- [Requirements](#Requirements)
-- [Installation](#Installation)
-- [Usage](#Usage)
-- [Project Structure](#Project-structure)
-- [How It Works](#How-it-works)
-- [Contributing](#Contributing)
-- [License](#License)
+- [Features](#✨-features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [How It Works](#how-it-works)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
