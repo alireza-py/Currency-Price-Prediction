@@ -133,6 +133,3 @@ To contribute:
 Distributed under the **MIT License**. See `LICENSE` for more information.
 
 ---
-
-## 📧 Contact
-Created by **alireza-py**
