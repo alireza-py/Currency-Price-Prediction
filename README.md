@@ -6,7 +6,7 @@ The results are automatically saved into a CSV file and can also be synced to a 
 ---
 
 ## 📑 Table of Contents
-- [Features](#-✨-features)
+- [Features](#features)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -17,7 +17,7 @@ The results are automatically saved into a CSV file and can also be synced to a 
 
 ---
 
-## ✨ Features
+## Features
 - Automated cryptocurrency price forecasting using **Deep Learning** (LSTM + BiLSTM).
 - Supports multiple time intervals:
   - Daily (`d`)
