@@ -5,7 +5,7 @@ from dataclasses import dataclass
 
 @dataclass
 class BaseConfigs:
-    download = False
+    download = True
     history_directory = pathlib.Path() / 'token-history'
 
 @dataclass
@@ -46,8 +46,10 @@ class Utils:
             return
         for file in self.list_file():
             result = (re.findall(r"\\(.+).csv", str(file)))[0]
+            print(result)
             Token.name = result[:-2]
             Token.interval = result[-1]
+            # print(Token.interval)
             name = f"{Token.name}_{Token.interval}"
             print(f"-> Updating ({name} file)")
             try:
