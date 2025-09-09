@@ -6,7 +6,7 @@ The results are automatically saved into a CSV file and can also be synced to a 
 ---
 
 ## 📑 Table of Contents
-- [Features](#✨-features)
+- [Features](#-✨-features)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
